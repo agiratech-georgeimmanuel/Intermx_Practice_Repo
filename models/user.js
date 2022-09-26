@@ -5,19 +5,22 @@ const userSchema = new mongoose.Schema({
         auto: true
       },
       name:{type:String},
+      parentUser: { type: mongoose.Schema.ObjectId, ref: 'User' },
       address: {
         line: { type: String },
         zipcode: { type: String },
         city: { type: String },
-        state: { type: mongoose.Schema.ObjectId },
-        stateCode: { type: String },
-        country: { type: String },
-        countryCode: { type: String }
+        state: { type: String }
       },
       email:{type:String},
-      contactno:{type:Number},
       createdAt: { type: Date },
-      updatedAt: { type: Date }
-})
+      updatedAt: { type: Date }},
+      {
+        timestamps: true,
+        versionKey: false,
+        toJSON: { getters: true },
+        toObject: { getters: true }
+      }
+)
 const User = mongoose.model('users',userSchema);
 module.exports= { User }
