@@ -11,7 +11,8 @@ success:
     status: success
     api-message: "%s deleted successfully"
     message: "%s deleted successfully"  
-  clientNameExist:
+error:    
+  userNameExist:
     code: 200089
     api-message: 'User Name already exist'
     message: 'User Name already exist'  

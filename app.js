@@ -19,6 +19,21 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/users',userRouter)
+
+app.use(function (err, req, res, next) {
+    let status = err.status || 500;
+    if(typeof err == "object" && err.code != undefined){
+      res.status(status).send(err);
+    }else{
+      let errMessage = err.message || "Internal server error";
+      res.status(status).send({
+        "error" : errMessage,
+        "message": errMessage,
+        "code": 12000,
+        "api-message": errMessage
+      });
+    }
+  });
 module.exports = app
 app.listen(8000,function(){
     console.log('server running on port 8000')
